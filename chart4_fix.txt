@@ -1,0 +1,42 @@
+# Chart 4: Experience vs Salary - FIXED CODE
+try:
+    # Filter and aggregate data
+    df_exp = df[df['minimumYearsExperience'] <= 12].copy()
+    exp_stats = df_exp.groupby('minimumYearsExperience')['average_salary'].agg(['mean', 'count']).reset_index()
+    
+    # Rename columns for clarity
+    exp_stats.columns = ['years_experience', 'avg_salary', 'job_count']
+    
+    # Filter to only include experience levels with sufficient data
+    exp_stats = exp_stats[exp_stats['job_count'] > 100].reset_index(drop=True)
+
+    fig4 = go.Figure()
+    fig4.add_trace(go.Scatter(
+        x=exp_stats['years_experience'],
+        y=exp_stats['avg_salary'],
+        mode='lines+markers',
+        name='Average Salary',
+        line=dict(color='green', width=3),
+        marker=dict(size=8, color='darkgreen'),
+        hovertemplate='<b>Experience:</b> %{x} years<br><b>Salary:</b> SGD %{y:,.0f}<br><b>Jobs:</b> %{customdata:,}<extra></extra>',
+        customdata=exp_stats['job_count'].values
+    ))
+
+    fig4.update_layout(
+        title='<b>Salary Growth by Years of Experience</b>',
+        xaxis_title='Minimum Years of Experience',
+        yaxis_title='Average Salary (SGD)',
+        hovermode='x unified',
+        template='plotly_white',
+        height=500,
+        xaxis=dict(dtick=1)
+    )
+    fig4.show()
+
+    print("\n✓ Chart 4 created successfully")
+    print("\nExperience vs Salary:")
+    print(exp_stats.round(2))
+except Exception as e:
+    print(f"⚠ Error creating Chart 4: {str(e)}")
+    import traceback
+    traceback.print_exc()

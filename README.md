@@ -605,10 +605,10 @@ NTU Data Science and Artificial Intelligence Programme (DS2F)
 February 2026
 
 ### Team Members
-- **Carol** - Data Analysis & Visualization
-- **Fred** - Dashboard Development & Documentation
-- **Heng** - Data Cleaning & Quality Assurance
-- **Wei Lin** - Business Insights & Reporting
+- **Carol**
+- **Fred**
+- **Heng CC**
+- **Wei Lin**
 
 ### Contributions
 This project represents a collaborative effort combining data analysis, visualization, web development, and business intelligence to deliver actionable insights from Singapore's job market data.

@@ -220,7 +220,7 @@ with col1:
         template='plotly_white',
         height=400
     )
-    st.plotly_chart(fig1, width="container")
+    st.plotly_chart(fig1, width="stretch")
 
 with col2:
     st.markdown("### Employment Type Distribution")
@@ -238,7 +238,7 @@ with col2:
         height=400,
         template='plotly_white'
     )
-    st.plotly_chart(fig8, width="container")
+    st.plotly_chart(fig8, width="stretch")
 
 # Chart 3: Salary by Position Level
 st.markdown("### Salary by Position Level")
@@ -274,7 +274,7 @@ fig3.update_layout(
     height=500,
     xaxis_tickangle=-45
 )
-st.plotly_chart(fig3, width="container")
+st.plotly_chart(fig3, width="stretch")
 
 # Chart 4 & 6 in columns
 col1, col2 = st.columns(2)
@@ -306,7 +306,7 @@ with col1:
         height=400,
         xaxis=dict(dtick=1)
     )
-    st.plotly_chart(fig4, width="container")
+    st.plotly_chart(fig4, width="stretch")
 
 with col2:
     st.markdown("### Salary Percentiles")
@@ -330,7 +330,7 @@ with col2:
         template='plotly_white',
         height=400
     )
-    st.plotly_chart(fig6, width="container")
+    st.plotly_chart(fig6, width="stretch")
 
 # Chart 2: Salary by Employment Type (Box Plot)
 st.markdown("### Salary Distribution by Employment Type")
@@ -354,7 +354,7 @@ fig2.update_layout(
     height=500,
     showlegend=False
 )
-st.plotly_chart(fig2, width="container")
+st.plotly_chart(fig2, width="stretch")
 
 # Chart 5 & 7 in columns
 col1, col2 = st.columns(2)
@@ -390,7 +390,7 @@ with col1:
         height=500,
         margin=dict(l=200)
     )
-    st.plotly_chart(fig5, width="container")
+    st.plotly_chart(fig5, width="stretch")
 
 with col2:
     st.markdown("### Top Industries by Average Salary")
@@ -419,7 +419,7 @@ with col2:
         height=500,
         xaxis_tickangle=-45
     )
-    st.plotly_chart(fig7, width="container")
+    st.plotly_chart(fig7, width="stretch")
 
 # Footer
 st.markdown("---")

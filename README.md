@@ -102,7 +102,7 @@ Module1-Assignment/
 ├── streamlit_dashboard.py             # Interactive Streamlit web app
 ├── requirements.txt                   # Core dependencies for Streamlit Cloud
 ├── requirements-dev.txt               # Full dev environment (includes Jupyter)
-├── environment.yml                    # Conda environment specification
+├── environment.yml.backup             # Conda environment (for local use only)
 ├── chart4_fix.txt                     # Reference code for Chart 4 fix
 ├── SALARY_INSIGHTS_ANALYSIS.md        # Business insights report
 ├── VSCode-Copilot-Journey.md          # Development journey documentation
@@ -153,6 +153,8 @@ Module1-Assignment/
    ```bash
    python -c "import streamlit, pandas, numpy, plotly; print('✓ All required packages installed!')"
    ```
+
+> **Note on Conda Environment:** The file `environment.yml.backup` is available for local conda environments but is **not used for Streamlit Cloud deployment** to avoid dependency conflicts. Streamlit Cloud uses `requirements.txt` only.
 
 ---
 

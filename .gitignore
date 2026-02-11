@@ -1,2 +1,4 @@
 .venv/
 full-history.txt
+SGJobData_cleaned.csv
+requirements.txt

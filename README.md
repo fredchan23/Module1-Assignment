@@ -7,6 +7,11 @@ A comprehensive data analysis project analyzing 1M+ job postings from Singapore 
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange?style=for-the-badge&logo=jupyter)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Interactive-red?style=for-the-badge&logo=streamlit)
 
+## 🔗 Live Demos
+
+**🌐 Interactive Streamlit App:** [https://module1-assignment-wzahr5d7eaerkjxqtqtjdf.streamlit.app/](https://module1-assignment-wzahr5d7eaerkjxqtqtjdf.streamlit.app/)  
+**📄 HTML Dashboard:** [https://fredchan23.github.io/Module1-Assignment/](https://fredchan23.github.io/Module1-Assignment/)
+
 ---
 
 ## 🎯 Three Ways to Experience the Dashboard
@@ -21,12 +26,14 @@ This project delivers insights through three complementary formats:
 
 ### 📄 HTML Dashboard  
 **File:** `salary_insights_dashboard.html` (1.07 MB)  
+**Live:** [https://fredchan23.github.io/Module1-Assignment/](https://fredchan23.github.io/Module1-Assignment/)  
 **Best for:** Sharing, presentations, offline viewing  
 **Features:** Self-contained, no dependencies, email-friendly  
 **Requires:** Any web browser
 
 ### 🌐 Streamlit Web App
 **File:** `streamlit_dashboard.py`  
+**Live:** [https://module1-assignment-wzahr5d7eaerkjxqtqtjdf.streamlit.app/](https://module1-assignment-wzahr5d7eaerkjxqtqtjdf.streamlit.app/)  
 **Best for:** Live demos, interactive analysis, client presentations  
 **Features:** Real-time filters, dynamic updates, professional UI  
 **Requires:** Python + Streamlit

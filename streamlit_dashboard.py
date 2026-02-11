@@ -57,7 +57,8 @@ st.markdown("""
 def load_data():
     """Load and prepare the salary data"""
     try:
-        df = pd.read_csv('SGJobData_cleaned.csv')
+        # Use Parquet format for faster loading and smaller file size
+        df = pd.read_parquet('SGJobData_cleaned.parquet')
         
         # Prepare additional columns
         df['salary_spread'] = df['salary_maximum'] - df['salary_minimum']
@@ -94,7 +95,7 @@ with st.spinner('Loading data...'):
     df = load_data()
 
 if df is None:
-    st.error("Failed to load data. Please ensure 'SGJobData_cleaned.csv' is in the same directory.")
+    st.error("Failed to load data. Please ensure 'SGJobData_cleaned.parquet' is in the same directory.")
     st.stop()
 
 # Header

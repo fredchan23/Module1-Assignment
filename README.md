@@ -96,7 +96,9 @@ This project performs end-to-end data analysis on Singapore job market data, fro
 Module1-Assignment/
 │
 ├── SGJobData.csv                      # Raw job posting data (~300MB)
-├── SGJobData_cleaned.csv              # Cleaned dataset (1,044,583 rows)
+├── SGJobData_cleaned.csv              # Cleaned dataset (272MB, 1,044,583 rows) *
+├── SGJobData_cleaned.parquet          # Compressed dataset (49MB, for deployment)
+├── convert_to_parquet.py              # CSV to Parquet conversion utility
 ├── salary_insights_dashboard.ipynb    # Jupyter notebook with analysis
 ├── salary_insights_dashboard.html     # Standalone HTML dashboard (1MB)
 ├── streamlit_dashboard.py             # Interactive Streamlit web app
@@ -107,7 +109,28 @@ Module1-Assignment/
 ├── SALARY_INSIGHTS_ANALYSIS.md        # Business insights report
 ├── VSCode-Copilot-Journey.md          # Development journey documentation
 └── README.md                          # This file
+
+* SGJobData_cleaned.csv is excluded from git (exceeds 100MB GitHub limit)
 ```
+
+### 📦 Data Format Strategy
+
+**Challenge:** The cleaned dataset (272MB CSV) exceeds GitHub's 100MB file size limit.
+
+**Solution:** Parquet compression format
+- ✅ **82% size reduction**: 272MB → 49MB
+- ✅ **Faster loading**: Columnar storage optimized for analytics
+- ✅ **GitHub compatible**: Well under 100MB limit
+- ✅ **Streamlit Cloud ready**: Native pandas support with `pyarrow`
+
+**For Development:**
+```bash
+# Convert CSV to Parquet (one-time setup)
+conda activate assignment1
+python3 convert_to_parquet.py
+```
+
+The `streamlit_dashboard.py` automatically loads from `SGJobData_cleaned.parquet`.
 
 ---
 
@@ -192,8 +215,11 @@ Module1-Assignment/
    - `salary_spread = salary_maximum - salary_minimum`
 5. **Parse JSON categories** to extract primary industry
 6. **Save cleaned data** to `SGJobData_cleaned.csv`
+7. **Convert to Parquet format** for deployment (`convert_to_parquet.py`)
 
-**Output:** `SGJobData_cleaned.csv` (284MB, 1,044,583 rows)
+**Output:** 
+- `SGJobData_cleaned.csv` (272MB, 1,044,583 rows) - Local development
+- `SGJobData_cleaned.parquet` (49MB, 82% compression) - Git & deployment
 
 ### Step 3: Exploratory Data Analysis (Jupyter Notebook)
 

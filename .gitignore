@@ -1,3 +1,7 @@
 .venv/
 full-history.txt
+chart4_fix.txt
+
+# Large data files - CSV exceeds GitHub 100MB limit
+# Use parquet version instead (49MB after 82% compression)
 SGJobData_cleaned.csv

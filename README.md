@@ -100,6 +100,9 @@ Module1-Assignment/
 ├── salary_insights_dashboard.ipynb    # Jupyter notebook with analysis
 ├── salary_insights_dashboard.html     # Standalone HTML dashboard (1MB)
 ├── streamlit_dashboard.py             # Interactive Streamlit web app
+├── requirements.txt                   # Core dependencies for Streamlit Cloud
+├── requirements-dev.txt               # Full dev environment (includes Jupyter)
+├── environment.yml                    # Conda environment specification
 ├── chart4_fix.txt                     # Reference code for Chart 4 fix
 ├── SALARY_INSIGHTS_ANALYSIS.md        # Business insights report
 ├── VSCode-Copilot-Journey.md          # Development journey documentation
@@ -130,13 +133,25 @@ Module1-Assignment/
    ```
 
 3. **Install required packages:**
+   
+   **For Streamlit Dashboard only:**
    ```bash
-   pip install pandas numpy matplotlib seaborn plotly jupyter streamlit
+   pip install -r requirements.txt
+   ```
+   
+   **For full development environment (includes Jupyter):**
+   ```bash
+   pip install -r requirements-dev.txt
+   ```
+   
+   **Or install manually:**
+   ```bash
+   pip install streamlit pandas numpy plotly
    ```
 
 4. **Verify installation:**
    ```bash
-   python -c "import pandas, numpy, matplotlib, seaborn, plotly, streamlit; print('All packages installed successfully!')"
+   python -c "import streamlit, pandas, numpy, plotly; print('✓ All required packages installed!')"
    ```
 
 ---
@@ -418,7 +433,21 @@ exp_stats.columns = ['years_exp', 'avg_salary', 'job_count']  # Explicit renamin
 - Added comprehensive legend with name, count, and percentage
 - Result: Clean, professional appearance
 
-### Challenge 4: Large Dataset Performance
+### Challenge 4: Streamlit Cloud Deployment Dependencies
+
+**Problem:** Streamlit Cloud deployment failed with "ModuleNotFoundError: No module named 'plotly'" despite plotly being in requirements.txt with many other packages.
+
+**Solution:** 
+- Created minimal `requirements.txt` with only essential packages for Streamlit dashboard
+- Created separate `requirements-dev.txt` for full development environment
+- Reduced dependencies from 59 packages to 9 core packages
+- Result: Faster deployment and cleaner dependency management
+
+**Files:**
+- `requirements.txt` - Streamlit Cloud deployment (streamlit, pandas, numpy, plotly)
+- `requirements-dev.txt` - Local development (includes Jupyter, matplotlib, testing tools)
+
+### Challenge 5: Large Dataset Performance
 
 **Problem:** 1M+ rows cause memory issues and slow processing.
 
@@ -562,6 +591,23 @@ exp_stats.columns = ['years_exp', 'avg_salary', 'job_count']  # Explicit renamin
    - Run on a local network for team access
    - Deploy to Streamlit Cloud for public sharing
    - Keep the app running for live demonstrations
+
+6. **Deploy to Streamlit Cloud (Optional):**
+   
+   **Prerequisites:**
+   - GitHub account
+   - Project pushed to GitHub repository
+   - `requirements.txt` in project root (already included)
+   
+   **Steps:**
+   1. Go to [share.streamlit.io](https://share.streamlit.io)
+   2. Sign in with GitHub
+   3. Click "New app"
+   4. Select your repository and branch
+   5. Set main file path: `streamlit_dashboard.py`
+   6. Click "Deploy"
+   
+   **Important:** The project uses a minimal `requirements.txt` optimized for Streamlit Cloud deployment. For local development with Jupyter, use `requirements-dev.txt`.
 
 ### Regenerating the Dashboard
 

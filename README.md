@@ -15,7 +15,7 @@ Note: Streamlit Cloud will crash on this dashboard after few minutes, still inve
 
 **🌐 Interactive Streamlit App:** 
 [https://module1-assignment-wzahr5d7eaerkjxqtqtjdf.streamlit.app/](https://module1-assignment-wzahr5d7eaerkjxqtqtjdf.streamlit.app/)
----
+
 
 ## 🎯 Three Ways to Experience the Dashboard
 

@@ -11,7 +11,8 @@ A comprehensive data analysis project analyzing 1M+ job postings from Singapore 
 
 **📄 HTML Dashboard:** [https://fredchan23.github.io/Module1-Assignment/](https://fredchan23.github.io/Module1-Assignment/)
 
-** Note: Streamlit Cloud will crash on this dashboard after few minutes, still investigating the cause if it's due to community version. **
+Note: Streamlit Cloud will crash on this dashboard after few minutes, still investigating the cause if it's due to community version.
+
 **🌐 Interactive Streamlit App:** [https://module1-assignment-wzahr5d7eaerkjxqtqtjdf.streamlit.app/](https://module1-assignment-wzahr5d7eaerkjxqtqtjdf.streamlit.app/)  
 ---
 

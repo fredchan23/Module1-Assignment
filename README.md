@@ -7,17 +7,14 @@ A comprehensive data analysis project analyzing 1M+ job postings from Singapore 
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange?style=for-the-badge&logo=jupyter)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Interactive-red?style=for-the-badge&logo=streamlit)
 
-## 🔗 Live Demos
+## 🔗 Live Demo
 
-**📄 HTML Dashboard:** [https://fredchan23.github.io/Module1-Assignment/](https://fredchan23.github.io/Module1-Assignment/)
-
-**🌐 Interactive Streamlit App:** [https://sdnibvcppey2eeglnevtec.streamlit.app/](https://sdnibvcppey2eeglnevtec.streamlit.app/)  
-*Note: Simplified demo in separate repository to demonstrate Streamlit capabilities within Community Cloud limitations.*
+**🌐 Interactive Streamlit App:** [https://module1assignment.streamlit.app/](https://module1assignment.streamlit.app/)
 
 
-## 🎯 Three Ways to Experience the Dashboard
+## 🎯 Two Ways to Experience the Dashboard
 
-This project delivers insights through three complementary formats:
+This project delivers insights through two complementary formats:
 
 ### 📓 Jupyter Notebook
 **File:** `salary_insights_dashboard.ipynb`  
@@ -25,19 +22,10 @@ This project delivers insights through three complementary formats:
 **Features:** Interactive code cells, inline visualizations, detailed analysis  
 **Requires:** Python + Jupyter
 
-### 📄 HTML Dashboard  
-**File:** `salary_insights_dashboard.html` (1.07 MB)  
-**Live:** [https://fredchan23.github.io/Module1-Assignment/](https://fredchan23.github.io/Module1-Assignment/)  
-**Best for:** Sharing, presentations, offline viewing  
-**Features:** Self-contained, no dependencies, email-friendly  
-**Requires:** Any web browser
-
 ### 🌐 Streamlit Web App
-**Repository:** [https://github.com/fredchan23/sgjobv2](https://github.com/fredchan23/sgjobv2)  
-**Live Demo:** [https://sdnibvcppey2eeglnevtec.streamlit.app/](https://sdnibvcppey2eeglnevtec.streamlit.app/)  
+**Live:** [https://module1assignment.streamlit.app/](https://module1assignment.streamlit.app/)  
 **Best for:** Live demos, interactive analysis, client presentations  
-**Features:** Simplified approach with real-time filtering, optimized for Streamlit Community Cloud  
-**Note:** Separate repository with streamlined implementation to work within Community Cloud resource limitations
+**Features:** Real-time filtering, 8 interactive Plotly visualizations, sidebar filters
 
 ---
 
@@ -53,8 +41,7 @@ This project delivers insights through three complementary formats:
   - [Step 1: Raw Data Collection](#step-1-raw-data-collection)
   - [Step 2: Data Cleaning](#step-2-data-cleaning)
   - [Step 3: Exploratory Analysis (Jupyter)](#step-3-exploratory-data-analysis-jupyter-notebook)
-  - [Step 4: HTML Dashboard](#step-4-html-dashboard-generation)
-  - [Step 5: Streamlit Dashboard](#step-5-streamlit-interactive-dashboard)
+  - [Step 4: Streamlit Dashboard](#step-4-streamlit-interactive-dashboard)
 - [Development Journey](#-development-journey)
 - [Technical Challenges & Solutions](#-technical-challenges--solutions)
 - [Key Findings](#-key-findings)
@@ -73,8 +60,7 @@ This project delivers insights through three complementary formats:
 | I want to... | Use this | Command |
 |--------------|----------|---------|
 | 🔍 Explore data interactively | Jupyter Notebook | `jupyter notebook salary_insights_dashboard.ipynb` |
-| 📊 View dashboard offline | HTML File | Open `salary_insights_dashboard.html` in browser |
-| 🎛️ Filter data in real-time | Streamlit App (External) | Visit [live demo](https://sdnibvcppey2eeglnevtec.streamlit.app/) |
+| 🎛️ Filter data in real-time | Streamlit App | Visit [live demo](https://module1assignment.streamlit.app/) |
 
 **First time setup:** See [Installation](#installation) section below.
 
@@ -82,7 +68,7 @@ This project delivers insights through three complementary formats:
 
 ## 📊 Project Overview
 
-This project performs end-to-end data analysis on Singapore job market data, from raw CSV data to interactive visualizations, professional HTML dashboard, and **interactive Streamlit web application**. The analysis provides actionable insights for HR professionals, job seekers, consultants, and policymakers.
+This project performs end-to-end data analysis on Singapore job market data, from raw CSV data to interactive visualizations and a full **Streamlit web application**. The analysis provides actionable insights for HR professionals, job seekers, consultants, and policymakers.
 
 ### Key Features
 
@@ -91,10 +77,9 @@ This project performs end-to-end data analysis on Singapore job market data, fro
 - **8 interactive visualizations** covering salary distributions, employment types, career progression, and more
 - **Multiple delivery formats:**
   - Jupyter Notebook for exploratory analysis
-  - Standalone HTML dashboard for easy sharing
-  - **Streamlit web app** (separate repository) with simplified interactive demo
+  - **Streamlit web app** with real-time interactive filtering
 - **Business insights** tailored for different stakeholders
-- **Interactive demonstration** optimized for cloud deployment
+- **Interactive deployment** optimized for Streamlit Community Cloud
 
 ---
 
@@ -103,21 +88,19 @@ This project performs end-to-end data analysis on Singapore job market data, fro
 ```
 Module1-Assignment/
 │
-├── SGJobData.csv                      # Raw job posting data (~300MB)
+├── SGJobData.csv                      # Raw job posting data (~300MB) *
 ├── SGJobData_cleaned.csv              # Cleaned dataset (272MB, 1,044,583 rows) *
 ├── SGJobData_cleaned.parquet          # Compressed dataset (49MB, for deployment)
 ├── convert_to_parquet.py              # CSV to Parquet conversion utility
+├── streamlit_dashboard.py             # Streamlit interactive web application
 ├── salary_insights_dashboard.ipynb    # Jupyter notebook with analysis
-├── salary_insights_dashboard.html     # Standalone HTML dashboard (1MB)
-├── requirements.txt                   # Development dependencies
+├── requirements.txt                   # Streamlit deployment dependencies
 ├── requirements-dev.txt               # Full dev environment (includes Jupyter)
-├── environment.yml.backup             # Conda environment (for local use only)
-├── chart4_fix.txt                     # Reference code for Chart 4 fix
 ├── SALARY_INSIGHTS_ANALYSIS.md        # Business insights report
 ├── VSCode-Copilot-Journey.md          # Development journey documentation
 └── README.md                          # This file
 
-* SGJobData_cleaned.csv is excluded from git (exceeds 100MB GitHub limit)
+* Excluded from git (exceeds 100MB GitHub limit)
 ```
 
 ### 📦 Data Format Strategy
@@ -290,64 +273,24 @@ The Jupyter notebook contains 18 cells organized into sections:
 - Consultancy market analysis
 - Government policy recommendations
 
-### Step 4: HTML Dashboard Generation
+### Step 4: Streamlit Interactive Dashboard
 
-**File:** `salary_insights_dashboard.html` (1.07MB)
+**File:** `streamlit_dashboard.py`  
+**Live:** [https://module1assignment.streamlit.app/](https://module1assignment.streamlit.app/)
 
-The final HTML dashboard is a **standalone, browser-ready** file with:
-
-#### Features:
-- **8 summary metric cards:**
-  - Total Jobs, Companies, Median/Mean Salary
-  - Entry/Senior Level salary, Growth Factor, Unique Roles
-
-- **8 embedded PNG charts** (matplotlib-generated, base64-encoded)
-  - All charts are static images for maximum compatibility
-  - No external dependencies required
-
-- **4 business insight sections:**
-  - For HR Departments
-  - For Job Seekers
-  - For Consultancy
-  - For Government
-
-- **Professional styling:**
-  - Gradient header background
-  - Responsive grid layout
-  - Hover effects on cards
-  - Mobile-friendly design
-
-#### Technical Details:
-- All charts embedded as base64 PNG images
-- Self-contained HTML (no external CSS/JS files)
-- Works in any modern browser
-- Optimized file size (1MB) for easy sharing
-
-### Step 5: Streamlit Interactive Dashboard
-
-**Repository:** [https://github.com/fredchan23/sgjobv2](https://github.com/fredchan23/sgjobv2)  
-**Live Demo:** [https://sdnibvcppey2eeglnevtec.streamlit.app/](https://sdnibvcppey2eeglnevtec.streamlit.app/)
-
-A simplified interactive web application demonstrating Streamlit capabilities for data exploration.
+Full-featured interactive web application deployed directly from this repository.
 
 #### Features:
-- **Streamlined approach** optimized for Streamlit Community Cloud limitations
-- **Interactive visualizations** showcasing Singapore job market data
-- **Real-time filtering** capabilities for dynamic data exploration
+- **8 interactive Plotly visualizations** matching the notebook analysis
+- **Real-time sidebar filters:** employment type, position level, salary range, years of experience
+- **Key metrics row** with live-recalculated totals, median, mean, and std dev
 - **Responsive design** working on desktop and mobile browsers
 
-#### Why Separate Repository?
-The Streamlit demo was moved to a dedicated repository with a simplified implementation to:
-1. Work within Streamlit Community Cloud resource constraints
-2. Demonstrate Streamlit's core capabilities effectively
-3. Provide a stable, lightweight interactive demo
-4. Separate deployment concerns from the main analysis project
-
 #### Technical Details:
-- **Framework:** Streamlit
-- **Deployment:** Streamlit Community Cloud
-- **Approach:** Simplified data handling for optimal cloud performance
-- **Access:** Public web demo (no installation required)
+- **Framework:** Streamlit 1.57+
+- **Deployment:** Streamlit Community Cloud (deploys from `main` branch)
+- **Data:** `SGJobData_cleaned.parquet` — columnar-read (9 columns only) + dtype optimization keeps RAM at ~312 MB
+- **Access:** Public web app (no installation required)
 
 ---
 
@@ -357,38 +300,30 @@ This project was developed with extensive use of **GitHub Copilot in VS Code**, 
 
 ### Project Timeline
 
-**Duration:** February 4-11, 2026 (7 days)
+**Duration:** February 4 – May 13, 2026
 
-#### Phase 1: Data Analysis & Cleaning (Day 1-2)
+#### Phase 1: Data Analysis & Cleaning (Feb, Day 1-2)
 - Analyzed raw dataset (1,048,585 rows)
 - Implemented 6-step cleaning process
 - Generated business insights report
 - Output: Clean dataset ready for visualization
 
-#### Phase 2: Jupyter Dashboard Creation (Day 2-3)
+#### Phase 2: Jupyter Dashboard Creation (Feb, Day 2-3)
 - Created interactive notebook with 18 cells
 - Developed 8 comprehensive visualizations
 - Fixed pandas aggregation column naming issue (Chart 4)
 - Documented code for reproducibility
 
-#### Phase 3: HTML Dashboard Generation (Day 3-4)
-- **Attempt 1:** Plotly `.to_html()` - empty charts
-- **Attempt 2:** Optimized Plotly - large file size (15+ MB)
-- **Attempt 3:** Kaleido image export - dependency issues
-- **Breakthrough:** Matplotlib PNG + base64 embedding
-- Result: Standalone 1.07 MB HTML file
+#### Phase 3: Streamlit Development (Feb, Day 6-7)
+- Created Streamlit dashboard (`streamlit_dashboard.py`) in this repository
+- Implemented 8 interactive Plotly charts with real-time sidebar filters
+- Deployed to Streamlit Community Cloud
 
-#### Phase 4: Visual Refinement (Day 4-5)
-- Fixed pie chart label overlaps
-- Optimized chart layouts
-- Enhanced professional appearance
-- Final HTML dashboard completed
-
-#### Phase 5: Streamlit Development (Day 6-7)
-- Created simplified Streamlit demo in separate repository
-- Implemented streamlined approach for Community Cloud
-- Optimized for cloud resource limitations
-- Deployed stable interactive demo
+#### Phase 4: OOM Diagnosis & Fix (May 13, 2026)
+- Diagnosed silent OOM crash — full parquet load consumed 931 MB RAM
+- Fixed with columnar read (9 columns), category dtypes, float32 downcasting
+- Memory reduced 931 MB → 312 MB (67%); app now stable on Community Cloud
+- Consolidated to this repository; cleaned scratch files and HTML artifacts
 
 ### Key Learnings
 
@@ -449,21 +384,18 @@ exp_stats.columns = ['years_exp', 'avg_salary', 'job_count']  # Explicit renamin
 - Added comprehensive legend with name, count, and percentage
 - Result: Clean, professional appearance
 
-### Challenge 4: Streamlit Community Cloud Limitations
+### Challenge 4: Streamlit Community Cloud OOM Crash
 
-**Problem:** Original Streamlit implementation with full dataset exceeded Community Cloud resource limits, causing crashes and instability.
+**Problem:** Loading all 21 parquet columns consumed 931 MB RAM, silently exceeding Streamlit Community Cloud's ~1 GB free-tier limit. The app started successfully but was OOM-killed at runtime, showing only "Error running app" with no traceback.
 
-**Solution:** 
-- Created separate repository with simplified implementation: [sgjobv2](https://github.com/fredchan23/sgjobv2)
-- Optimized data handling for cloud resource constraints
-- Streamlined visualizations for stable performance
-- Result: Reliable, publicly accessible interactive demo
+**Root cause identified from deployment logs:** Clean startup → runtime crash → no Python exception visible → OOM kill.
 
-**Approach:**
-- Separate deployment repository for cleaner dependency management
-- Simplified data pipeline optimized for cloud resources
-- Focus on core Streamlit capabilities demonstration
-- Stable deployment on Community Cloud tier
+**Solution applied to `streamlit_dashboard.py`:**
+- `pd.read_parquet(columns=needed_cols)` — load only 9 of 21 columns (−476 MB)
+- Cast high-cardinality string columns to `category` dtype (−140 MB)
+- Downcast salary float64 → float32 (−12 MB)
+- Remove unused `year_month` Period column computation
+- **Result: 931 MB → 312 MB (67% reduction)** — stable on Community Cloud
 
 ### Challenge 5: Large Dataset Performance
 
@@ -610,27 +542,21 @@ df = df[
 
 ### Accessing the Streamlit Dashboard
 
-**Live Demo:** [https://sdnibvcppey2eeglnevtec.streamlit.app/](https://sdnibvcppey2eeglnevtec.streamlit.app/)
+**Live:** [https://module1assignment.streamlit.app/](https://module1assignment.streamlit.app/)
 
-**Repository:** [https://github.com/fredchan23/sgjobv2](https://github.com/fredchan23/sgjobv2)
-
-1. **Access the live demo:**
-   - Visit the deployed Streamlit app (no installation required)
+1. **Access the live app:**
+   - Visit the link above — no installation required
    - Works on any device with a web browser
-   - Optimized for both desktop and mobile viewing
 
 2. **Explore interactive features:**
-   - Use built-in filters to explore different data segments
-   - Hover over charts for detailed information
-   - Interactive visualizations demonstrate Streamlit capabilities
-   - Real-time updates based on your selections
+   - Use sidebar filters (employment type, position level, salary range, experience)
+   - Hover over charts for detailed tooltips
+   - All 8 visualizations update in real-time based on your selections
 
-3. **Check the source code:**
-   - Visit the [sgjobv2 repository](https://github.com/fredchan23/sgjobv2) for implementation details
-   - Review the simplified approach for Community Cloud deployment
-   - See how data is optimized for cloud resource limitations
-
-**Note:** The Streamlit demo is maintained in a separate repository with a streamlined implementation specifically designed to work within Streamlit Community Cloud constraints. This ensures stable, reliable access to the interactive dashboard.
+3. **Run locally:**
+   ```bash
+   streamlit run streamlit_dashboard.py
+   ```
 
 ### Regenerating the Dashboard
 
@@ -651,13 +577,11 @@ EOF
 | Format | Best For | Pros | Cons |
 |--------|----------|------|------|
 | **Jupyter Notebook** | Data exploration, development | Interactive code, detailed analysis, reproducible | Requires Python/Jupyter |
-| **HTML Dashboard** | Sharing, presentations, archival | No dependencies, email-friendly, works offline | Static, no filtering |
-| **Streamlit App** | Quick demos, interactive showcase | No installation, web-based, interactive filtering | Simplified implementation for cloud constraints |
+| **Streamlit App** | Demos, interactive analysis | No installation, web-based, real-time filtering | Requires internet for live app |
 
 **Recommendation:**
 - **Development/Analysis:** Use Jupyter Notebook
-- **Quick Sharing:** Use HTML Dashboard (1MB, self-contained)
-- **Interactive Demo:** Use [Streamlit Dashboard](https://sdnibvcppey2eeglnevtec.streamlit.app/) (web-based, no setup)
+- **Interactive Demo:** Use [Streamlit Dashboard](https://module1assignment.streamlit.app/) (web-based, no setup)
 
 ---
 
@@ -724,6 +648,13 @@ For questions or issues:
   - Optimized for resource constraints
   - Stable cloud deployment with updated demo link
 
+- **v1.3** (May 13, 2026) - OOM fix & repo consolidation
+  - Diagnosed silent OOM crash on Streamlit Community Cloud (931 MB dataset exceeded ~1 GB RAM limit)
+  - Fixed: columnar parquet read (9/21 columns) + category/float32 dtype optimization → 312 MB (−67%)
+  - Migrated Streamlit app back to this repository; retired separate sgjobv2 repo
+  - New canonical URL: [https://module1assignment.streamlit.app/](https://module1assignment.streamlit.app/)
+  - Removed HTML dashboard and scratch/temp files; cleaned repository
+
 ---
 
 ## 🤖 AI-Assisted Development
@@ -745,7 +676,7 @@ The complete development journey, including prompting strategies, challenges fac
 
 ---
 
-**Last Updated:** February 14, 2026  
+**Last Updated:** May 13, 2026  
 **Status:** ✅ Complete and Production-Ready
 
 ---

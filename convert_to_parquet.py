@@ -17,7 +17,19 @@ def convert_csv_to_parquet():
     # Read CSV
     df = pd.read_csv(csv_file)
     print(f"Loaded {len(df):,} rows × {len(df.columns)} columns")
-    
+
+    # Apply salary outlier filter (mirrors salary_insights_dashboard.ipynb Section 2)
+    # salary_minimum < 1200: below Singapore Progressive Wage Model / LQS floor
+    # salary_maximum > 30,000: annual salaries mistakenly entered in monthly fields
+    rows_before = len(df)
+    df = df[
+        (df['salary_minimum'] >= 1200) &
+        (df['salary_maximum'] <= 30_000)
+    ].copy()
+    rows_dropped = rows_before - len(df)
+    print(f"Salary outliers dropped: {rows_dropped:,} rows ({rows_dropped/rows_before*100:.2f}%)")
+    print(f"Clean rows for export: {len(df):,}")
+
     # Save as Parquet with compression
     print(f"\nConverting to Parquet format...")
     df.to_parquet(parquet_file, engine='pyarrow', compression='snappy', index=False)

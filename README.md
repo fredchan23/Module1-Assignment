@@ -210,7 +210,12 @@ python3 convert_to_parquet.py
    - Null values in critical columns
    - Salary outliers (>SGD 500,000)
    - Invalid min>max salary relationships
-4. **Add derived columns:**
+4. **Remove salary outliers (post-clean filter applied in notebook):**
+   - `salary_minimum < 1,200` — blanket floor aligned to Singapore's Progressive Wage Model / Local Qualifying Salary (LQS rising to S$1,800 from Jul 2026); removes placeholders, part-time noise, and sub-subsistence entries
+   - `salary_maximum > 30,000` — annual salaries mistakenly entered in monthly fields (99th percentile of salary_max is SGD 20,000)
+   - Removed 27,005 rows (2.59%); 1,017,578 rows retained
+   - Decision: **Drop** (not impute) — values carry no recoverable information
+5. **Add derived columns:**
    - `average_salary = (salary_minimum + salary_maximum) / 2`
    - `salary_spread = salary_maximum - salary_minimum`
 5. **Parse JSON categories** to extract primary industry
@@ -469,6 +474,33 @@ exp_stats.columns = ['years_exp', 'avg_salary', 'job_count']  # Explicit renamin
 - Sampling for box plots (2k per category)
 - Efficient pandas operations with observed=True
 - Chunked data processing where needed
+
+### Challenge 6: Unrealistic Salary Values in Cleaned Dataset
+
+**Problem:** Dashboard showed `salary_minimum = $1` and implausibly large `salary_maximum` values (e.g. $400,000/month), distorting all salary charts and statistics.
+
+**Investigation findings:**
+- `salary_minimum == 1`: 2,534 rows — sentinel placeholder left when job posters skipped the field
+- `salary_minimum < 100`: 7,420 rows total — systematic scraper/data-entry artifact
+- `salary_maximum > 30,000`: 1,375 rows — annual salaries entered in monthly fields (e.g. SGD 267,820 annual ≠ monthly)
+- 99th percentile of `salary_maximum` is SGD 20,000; 99.9th is SGD 35,000
+- $100–$1,200 band: 18,224 rows — mix of part-time, internship, and suspicious permanent/full-time records
+
+**Decision: Drop with $1,200 blanket floor (not impute)**
+- Rationale: Singapore's Progressive Wage Model (PWM) and Local Qualifying Salary (LQS, rising to S$1,800/month from Jul 2026) mean sub-$1,200 full-time salaries are economically implausible for formal employment
+- Part-time and internship data below this threshold (1.76% of data) is also dropped — acceptable given dataset size and the distortion these low values cause on salary analysis
+- High-end values cannot be reliably converted (annual÷12 would be a guess)
+- Impact: 27,005 rows removed (2.59%) from 1,044,583
+
+**Solution applied in `salary_insights_dashboard.ipynb` (Section 2 — Load and Prepare Data):**
+```python
+df = df[
+    (df['salary_minimum'] >= 1200) &
+    (df['salary_maximum'] <= 30_000)
+].copy()
+```
+
+**Result:** 1,017,578 clean rows with salary range SGD 1,200–30,000/month, eliminating chart distortion.
 
 ---
 

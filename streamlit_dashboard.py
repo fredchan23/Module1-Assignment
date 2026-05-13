@@ -60,6 +60,14 @@ def load_data():
         # Use Parquet format for faster loading and smaller file size
         df = pd.read_parquet('SGJobData_cleaned.parquet')
         
+        # Apply salary outlier filter (mirrors notebook Section 2)
+        # salary_minimum < 1200: below Singapore PWM/LQS floor
+        # salary_maximum > 30,000: annual salaries in monthly fields
+        df = df[
+            (df['salary_minimum'] >= 1200) &
+            (df['salary_maximum'] <= 30_000)
+        ].copy()
+
         # Prepare additional columns
         df['salary_spread'] = df['salary_maximum'] - df['salary_minimum']
         df['posting_date'] = pd.to_datetime(df['metadata_newPostingDate'], errors='coerce')
@@ -426,7 +434,7 @@ st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: #666; padding: 2rem 0;">
     <p><b>Singapore Salary Insights Dashboard</b></p>
-    <p>Data Source: 1,044,583 job postings from 53,151 companies</p>
+    <p>Data Source: 1,017,578 job postings from 52,130 companies (salary filter: SGD 1,200–30,000/month)</p>
     <p>💼 Empowering HR, Job Seekers, Consultants, and Policy Makers with Data-Driven Insights</p>
 </div>
 """, unsafe_allow_html=True)

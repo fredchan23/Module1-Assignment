@@ -58,10 +58,22 @@ st.markdown("""
 def load_data():
     """Load and prepare the salary data"""
     try:
-        # Use Parquet format for faster loading and smaller file size
+        # Load only the columns used by the dashboard to stay within the
+        # Streamlit Community Cloud ~1 GB RAM limit (full dataset = 931 MB)
+        needed_cols = [
+            'categories', 'employmentTypes', 'metadata_newPostingDate',
+            'minimumYearsExperience', 'positionLevels', 'postedCompany_name',
+            'salary_maximum', 'salary_minimum', 'average_salary'
+        ]
         parquet_path = Path(__file__).parent / 'SGJobData_cleaned.parquet'
-        df = pd.read_parquet(parquet_path)
-        
+        df = pd.read_parquet(parquet_path, columns=needed_cols)
+
+        # Downcast dtypes to reduce memory: ~455 MB → ~231 MB
+        for col in ['employmentTypes', 'positionLevels', 'postedCompany_name']:
+            df[col] = df[col].astype('category')
+        for col in ['salary_minimum', 'salary_maximum', 'average_salary']:
+            df[col] = pd.to_numeric(df[col], downcast='float')
+
         # Apply salary outlier filter (mirrors notebook Section 2)
         # salary_minimum < 1200: below Singapore PWM/LQS floor
         # salary_maximum > 30,000: annual salaries in monthly fields
@@ -72,8 +84,6 @@ def load_data():
 
         # Prepare additional columns
         df['salary_spread'] = df['salary_maximum'] - df['salary_minimum']
-        df['posting_date'] = pd.to_datetime(df['metadata_newPostingDate'], errors='coerce')
-        df['year_month'] = df['posting_date'].dt.to_period('M')
         
         # Extract primary industry from categories JSON
         industries_list = []

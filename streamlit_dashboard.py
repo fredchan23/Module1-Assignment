@@ -9,6 +9,7 @@ import numpy as np
 import plotly.graph_objects as go
 import json
 import warnings
+from pathlib import Path
 warnings.filterwarnings('ignore')
 
 # Page configuration
@@ -58,7 +59,8 @@ def load_data():
     """Load and prepare the salary data"""
     try:
         # Use Parquet format for faster loading and smaller file size
-        df = pd.read_parquet('SGJobData_cleaned.parquet')
+        parquet_path = Path(__file__).parent / 'SGJobData_cleaned.parquet'
+        df = pd.read_parquet(parquet_path)
         
         # Apply salary outlier filter (mirrors notebook Section 2)
         # salary_minimum < 1200: below Singapore PWM/LQS floor
